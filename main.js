@@ -11,7 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 async function fetchProjects() {
   const grid = document.getElementById('projects-grid');
   try {
-    const res = await fetch('http://localhost:5000/api/projects');
+    const res = await fetch('/api/projects');
     if (!res.ok) throw new Error('Network response was not ok');
     
     const projects = await res.json();

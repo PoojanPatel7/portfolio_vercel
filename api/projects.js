@@ -1,14 +1,6 @@
-const express = require('express');
-const cors = require('cors');
-const app = express();
-const PORT = process.env.PORT || 5000;
-
-app.use(cors());
-
-// Fetch GitHub repositories
-app.get('/api/projects', async (req, res) => {
+export default async function handler(req, res) {
     try {
-        const username = 'PoojanPatel7'; // Using the username from git config
+        const username = 'PoojanPatel7';
         // GitHub API requires a User-Agent header
         const response = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=12`, {
             headers: {
@@ -48,13 +40,9 @@ app.get('/api/projects', async (req, res) => {
         // Add it to the top of the list
         projects.unshift(cashewProject);
 
-        res.json(projects);
+        res.status(200).json(projects);
     } catch (error) {
         console.error('Error fetching GitHub repos:', error);
         res.status(500).json({ error: 'Failed to fetch projects' });
     }
-});
-
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-});
+}
