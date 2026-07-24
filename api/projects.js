@@ -25,7 +25,18 @@ export default async function handler(req, res) {
             topics: repo.topics || []
         }));
 
-        // Custom curated project
+        // Custom curated projects
+        const gadgetGoProject = {
+            id: 'gadget-go',
+            name: 'GadgetGo.com',
+            description: 'A Full-Stack E-Commerce & Device Buyback Platform. Features include an E-Commerce Store with cart, coupons, and wallet, plus a Device Buyback engine for instant AI-adjusted price estimates. Built with PHP, MySQL, TailwindCSS, Chart.js, Razorpay, and Google Maps API with three distinct portals (Customer, Admin, Employee).',
+            url: 'https://github.com/PoojanPatel7/GadgetGo.com',
+            homepage: 'https://gadgetgo.free.nf/',
+            language: 'PHP',
+            stars: 'Premium',
+            topics: ['php', 'mysql', 'ecommerce', 'tailwind']
+        };
+
         const cashewProject = {
             id: 'cashew-pro-erp',
             name: 'CashewPro ERP',
@@ -37,8 +48,9 @@ export default async function handler(req, res) {
             topics: ['flutter', 'firebase', 'erp']
         };
 
-        // Add it to the top of the list
+        // Add them to the top of the list
         projects.unshift(cashewProject);
+        projects.unshift(gadgetGoProject);
 
         res.status(200).json(projects);
     } catch (error) {
