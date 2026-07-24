@@ -40,7 +40,7 @@ async function fetchProjects() {
   }
 }
 
-fetchProjects();
+// fetchProjects();
 
 // ==========================================
 // 2. GSAP Scroll Animations & Typed.js
@@ -468,4 +468,4 @@ if (prevBtn && nextBtn) {
 }
 
 // Initialize
-fetchGitHubProjects();
+// fetchGitHubProjects();

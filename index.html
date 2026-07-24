@@ -185,17 +185,44 @@
       </section>
 
       <section id="projects-section" class="section fullscreen-carousel-section">
-        <h2 style="text-align: center; margin-bottom: 2rem;">GitHub Projects</h2>
+        <h2 style="text-align: center; margin-bottom: 2rem;">Featured Project</h2>
         
-        <div class="carousel-container">
-          <button class="carousel-btn prev-btn">&lt;</button>
-          
-          <div class="carousel-track" id="github-projects-track">
-            <!-- Slides will be injected here via JS -->
-            <div class="loading" style="text-align: center; width: 100%; padding: 4rem;">Fetching your projects from GitHub...</div>
+        <div class="carousel-container" style="overflow: visible;">
+          <div class="carousel-slide active" style="position: relative; opacity: 1; transform: none; width: 100%;">
+            <div class="project-split-layout">
+              <div class="project-left">
+                <h1 style="text-transform: capitalize;">GadgetGo.com</h1>
+                <div class="pm-image" style="background-image: url('https://picsum.photos/seed/gadgetgo/800/400')"></div>
+                <p>A Full-Stack E-Commerce & Device Buyback Platform. Features include an E-Commerce Store with cart, coupons, and wallet, plus a Device Buyback engine for instant AI-adjusted price estimates. Built with PHP, MySQL, TailwindCSS, Chart.js, Razorpay, and Google Maps API with three distinct portals (Customer, Admin, Employee).</p>
+                <div class="pm-links">
+                  <a href="https://github.com/PoojanPatel7/GadgetGo.com" class="pm-github" target="_blank">View on GitHub</a>
+                  <a href="https://gadgetgo.free.nf/" class="pm-live" target="_blank">Live Demo</a>
+                </div>
+              </div>
+              <div class="project-right">
+                <h2 style="margin-bottom: 0.5rem;">Tools & Technology</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 2rem;">Click any tag to blast it!</p>
+                <div class="skills-container" style="margin-top: 0;">
+                  <div class="skill-tag" style="cursor: pointer;">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP">
+                    <span>PHP</span>
+                  </div>
+                  <div class="skill-tag" style="cursor: pointer;">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL">
+                    <span>MySQL</span>
+                  </div>
+                  <div class="skill-tag" style="cursor: pointer;">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="TailwindCSS">
+                    <span>TailwindCSS</span>
+                  </div>
+                  <div class="skill-tag" style="cursor: pointer;">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+                    <span>Chart.js & JS</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          
-          <button class="carousel-btn next-btn">&gt;</button>
         </div>
       </section>
 
