@@ -1076,7 +1076,7 @@ footer {
   gap: 1rem;
 }
 
-.pm-links a {
+.pm-links a, .pm-links span {
   padding: 0.8rem 1.5rem;
   border-radius: 8px;
   text-decoration: none;
@@ -1101,6 +1101,16 @@ footer {
 .pm-live:hover {
   background: var(--accent-secondary);
   box-shadow: 0 0 15px rgba(37, 99, 235, 0.5);
+}
+
+.pm-coming-soon {
+  background: transparent;
+  border: 1px dashed var(--accent-color);
+  color: var(--text-secondary);
+  cursor: default;
+}
+.pm-coming-soon:hover {
+  background: rgba(37, 99, 235, 0.05);
 }
 
 @media screen and (max-width: 900px) {
