@@ -95,12 +95,12 @@ gsap.utils.toArray('.section').forEach(section => {
 });
 
 // Step-by-step timeline animation
-gsap.utils.toArray('.anim-step').forEach((step, i) => {
+gsap.utils.toArray('.stack-card-inner').forEach((step, i) => {
   gsap.fromTo(step, 
-    { opacity: 0, x: -50 },
+    { opacity: 0, y: 50 },
     {
       opacity: 1,
-      x: 0,
+      y: 0,
       duration: 0.8,
       ease: "back.out(1.7)",
       scrollTrigger: {
@@ -469,3 +469,112 @@ if (prevBtn && nextBtn) {
 
 // Initialize
 // fetchGitHubProjects();
+
+// ==========================================
+// Premium Hero Sequence (Scroll Video)
+// ==========================================
+const canvas = document.getElementById("scroll-video-canvas");
+if (canvas) {
+  const context = canvas.getContext("2d");
+  
+  // Dynamic High-Res Canvas Sizing based on actual CSS box size
+  function resizeCanvas() {
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width * (window.devicePixelRatio || 1);
+    canvas.height = rect.height * (window.devicePixelRatio || 1);
+    render();
+  }
+  window.addEventListener("resize", resizeCanvas);
+
+  const frameCount = 120;
+  const currentFrame = index => (
+    `/images/ezgif-frame-${(index + 1).toString().padStart(3, '0')}.jpg`
+  );
+
+  const images = [];
+  const video = {
+    frame: 0
+  };
+
+  for (let i = 0; i < frameCount; i++) {
+    const img = new Image();
+    img.src = currentFrame(i);
+    images.push(img);
+  }
+
+  images[0].onload = () => {
+    resizeCanvas();
+  };
+
+  function render() {
+    const img = images[video.frame];
+    if (img && img.complete) {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Calculate object-fit: cover logic
+      const canvasRatio = canvas.width / canvas.height;
+      const imgRatio = img.width / img.height;
+      let drawWidth, drawHeight, offsetX, offsetY;
+
+      if (canvasRatio > imgRatio) {
+        drawWidth = canvas.width;
+        drawHeight = canvas.width / imgRatio;
+        offsetX = 0;
+        offsetY = (canvas.height - drawHeight) / 2;
+      } else {
+        drawWidth = canvas.height * imgRatio;
+        drawHeight = canvas.height;
+        offsetX = (canvas.width - drawWidth) / 2;
+        offsetY = 0;
+      }
+      
+      context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+    }
+  }
+
+  // Master Timeline for the Hero Sequence
+  let tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#hero-sequence",
+      start: "top top",
+      end: "bottom bottom", // Scrubs exactly over the 500vh height
+      scrub: 0.5,
+      // No pin: true required since .video-container is position: sticky in CSS!
+    }
+  });
+
+  // 1. Scrub Video Frames
+  tl.to(video, {
+    frame: frameCount - 1,
+    snap: "frame",
+    ease: "none",
+    onUpdate: render,
+    duration: 10 // Master duration reference
+  }, 0);
+
+  // 2. The Zoom Transition (Last 10% of scroll)
+  // We zoom slightly into the canvas to close the sequence
+  tl.to(canvas, {
+    scale: 1.3, // slight zoom
+    duration: 1.5,
+    ease: "power2.inOut"
+  }, 8.5);
+
+  // Navbar visibility toggle
+  ScrollTrigger.create({
+    trigger: "#main-content",
+    start: "top top", // When main-content hits top of viewport
+    toggleClass: { targets: ".navbar", className: "visible" }
+  });
+
+  // Hide global bubbles while in the hero sequence
+  ScrollTrigger.create({
+    trigger: "#hero-sequence",
+    start: "top top",
+    end: "bottom top", // Until hero sequence is completely out of view
+    onEnter: () => document.body.classList.add('hide-bubbles'),
+    onLeave: () => document.body.classList.remove('hide-bubbles'),
+    onEnterBack: () => document.body.classList.add('hide-bubbles'),
+    onLeaveBack: () => document.body.classList.remove('hide-bubbles')
+  });
+}
