@@ -112,6 +112,25 @@ gsap.utils.toArray('.stack-card-inner').forEach((step, i) => {
   );
 });
 
+// Premium Project Cards Scroll Animation
+gsap.utils.toArray('.premium-project-card').forEach((card) => {
+  gsap.fromTo(card, 
+    { opacity: 0, y: 80, scale: 0.97 },
+    {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      duration: 1.2,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: card,
+        start: "top 85%",
+        toggleActions: "play none none reverse"
+      }
+    }
+  );
+});
+
 // Handle window resize (removed Three.js logic)
 
 // ==========================================
